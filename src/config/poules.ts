@@ -73,7 +73,7 @@ export const CATEGORIES: Category[] = [
     displayMode: 'standings',
     groups: [
       { key: "bond", label: "Bond"
-        , pouleIds: [ 182681,182682,182683,182684,182685,182686,182687,182688    ] },  // 13
+        , pouleIds: [ 182681,182682,182683,182684,182685,182686,182687,182688    ] },  
       { key: "midden-nederland", label: "Midden Nederland"
         , pouleIds: [ 181308,181309,181310,181311,181312,181313,181314,181315,181316,181317, 181318 ] },
       { key: "noord-holland", label: "Noord-Holland"
