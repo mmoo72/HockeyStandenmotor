@@ -1,0 +1,1 @@
+npm run dev:trusted -- .\Fortinet_CA_SSL.cer

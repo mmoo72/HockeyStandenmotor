@@ -1,0 +1,58 @@
+export async function fetchPoule(category: string) {
+  // Replace with real API call
+  return {
+    categoryName: category.toUpperCase(),
+    rows: [
+      { team: "Team A", played: 10, points: 25 },
+      { team: "Team B", played: 10, points: 22 },
+      { team: "Team C", played: 10, points: 18 },
+    ],
+  };
+}
+
+
+/* 
+
+Menu links
+
+Heren  |  Competitie | Gold Cup | Silver Cup | nacompetitie
+Dames  |  Competitie | Gold Cup | Silver Cup | nacompetitie
+
+Heren Reserve | Bond | Noord Holland | Zuid Holland | Midden Nederland
+Dames Reserve | Bond | Noord Holland | Zuid Holland | Midden Nederland
+JO18 
+MO18
+JO16
+MO16
+
+na selecteren  Heren / Dames
+horizontaal menu: Competitie | Gold Cup | Silver Cup | nacompetitie
+ 
+
+
+Heren
+  Standaard
+  Gold-Cup
+  Silver-Cup
+  Reserve
+Dames
+JO18
+  Bond
+    Voorcompetitie
+    Competitie
+    Zaal
+    Nacompetitie
+  
+
+MO18
+JO16
+MO16
+
+Heren
+
+    Gold-Cup
+    Silver-Cup
+
+
+*/
+
