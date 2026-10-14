@@ -29,12 +29,20 @@ export const pouleQuery = (pouleId: number, force = false) =>
 type Entry = { id: number; result: PouleResult };
 
 function entrySortName(entry: Entry) {
-  return entry.result.ok
-    ? (entry.result.data.competition.class_name ??
-      entry.result.data.competition.poule_name ??
-      entry.result.data.matches.find((match) => match.poule_name)?.poule_name ??
-      entry.result.data.name)
-    : `Poule ${entry.id}`;
+  if (!entry.result.ok) return `Poule ${entry.id}`;
+
+  const { data } = entry.result;
+  const matchPouleName = data.matches.find((match) => match.poule_name)?.poule_name;
+  const isCup = /^(gold|silver) cup\b/i.test(data.competition.name);
+  const pouleName = data.competition.poule_name ?? matchPouleName;
+
+  // Cup class names can be stale or generic (e.g. "Silver Cup - Finale")
+  // while match poule names contain the current KO round used for ordering.
+  if (isCup && pouleName) return pouleName;
+
+  return data.competition.class_name ??
+    pouleName ??
+    data.name;
 }
 
 function groupByKlasse(entries: Entry[]) {
@@ -105,7 +113,8 @@ export function StandingsView({ title, pouleIds, displayMode = "standings" }: { 
 
       {klasses.map(([klasse, items]) => (
         <div key={klasse} className="space-y-3">
-          {!title.toLowerCase().endsWith(klasse.toLowerCase()) && (
+          {!/^(gold|silver) cup\s*[-–—]\s*(finale|ko ronde\s+\d+)$/i.test(klasse.trim()) &&
+            !title.toLowerCase().endsWith(klasse.toLowerCase()) && (
             <h2 className="text-lg font-semibold uppercase tracking-wider text-muted-foreground">
               {klasse}
             </h2>

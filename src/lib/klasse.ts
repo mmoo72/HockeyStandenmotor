@@ -4,9 +4,9 @@
 // "1e klasse", "2e klasse" ... or for reserves "Reserve 1e klasse" etc.
 
 const NAMED_ORDER: Record<string, number> = {
-  Hoofdklasse: 0,
-  Promotieklasse: 1,
-  Overgangsklasse: 2,
+  hoofdklasse: 0,
+  promotieklasse: 1,
+  overgangsklasse: 2,
   landelijk: 0,
   super: 1,
   subtop: 2,
@@ -22,6 +22,8 @@ const NAMED_ORDER: Record<string, number> = {
   "silver cup - ko ronde 3": 7,
   "silver cup - ko ronde 2": 8,
   "silver cup - ko ronde 1": 9,
+  "gold cup - ko ronde 4": 6,
+  "gold cup - ko ronde 3": 7,
   "gold cup - ko ronde 2": 8,
   "gold cup - ko ronde 1": 9,
 
@@ -38,6 +40,11 @@ export function klasseRank(className: string | undefined | null): number {
   const core = isReserve ? norm.slice("reserve ".length) : norm;
   const offset = isReserve ? 0.5 : 0;
 
+  // Competition names may include extra qualifiers, e.g. "Staatsloterij
+  // Hoofdklasse Heren" or "Promotieklasse Heren".
+  if (core.includes("hoofdklasse")) return NAMED_ORDER.hoofdklasse + offset;
+  if (core.includes("promotieklasse")) return NAMED_ORDER.promotieklasse + offset;
+  if (core.includes("overgangsklasse")) return NAMED_ORDER.overgangsklasse + offset;
 
   if (core in NAMED_ORDER) return NAMED_ORDER[core] + offset;
 

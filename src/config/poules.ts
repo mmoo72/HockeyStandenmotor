@@ -33,9 +33,12 @@ export const CATEGORIES: Category[] = [
                                               , 182659, 182660, 182661, 182662
                                               , 182663, 182664, 182917 ] },
       { key: "goldcup", label: "Gold Cup", displayMode:'matches'
-        , pouleIds: [ 183128, 183129, 183130, 183171 ,183172 ,183170 ]},
+        , pouleIds: [ 183128, 183129, 183130, 
+                      183170, 183171 ,183172, 
+                        183206, 183205]},
       { key: "silvercup", label: "Silver Cup", displayMode:'matches'
-        , pouleIds: [ 183131, 183132,183133, 183156 ,183157, 183158, 183159 ] }
+        , pouleIds: [ 183131, 183132,183133,  183156 ,183157, 183158, 183159,   183181,  183182,  183183,  183184, 183185, 
+          183212 , 183213, 183214, 183215, 183216] }
     ] },
   { key: "dames", label: "Dames", displayMode: 'standings'
     , groups: [
@@ -45,9 +48,11 @@ export const CATEGORIES: Category[] = [
                                               , 182673, 182674, 182675, 182676
                                               , 182677, 182678, 182679, 182680] },
       { key: "goldcup", label: "Gold Cup", displayMode:'matches'
-        , pouleIds: [ 183121, 183122, 183123]},
+        , pouleIds: [ 183121, 183122, 183123, 183186, 183187, 183188]},
       { key: "silvercup", label: "Silver Cup", displayMode:'matches'
-        , pouleIds: [ 183124,183125,183126,183127, 183173, 183174, 183175, 183176 ]},
+        , pouleIds: [ 183124,183125,183126,183127, 183173, 183174, 183175, 183176 
+          , 183207, 183208, 183209, 183210,183211
+        ]},
 ] },
   
   {
@@ -92,7 +97,7 @@ export const CATEGORIES: Category[] = [
                     , 182947,182948,182949,182950 ] },
     ],
   },
-  { key: "jo18", 
+  { key: "JO18", 
     label: "JO18",     
     displayMode: 'standings',
     phases: [ { key: "Voorcompetitie", pathKey: "V",
@@ -101,7 +106,7 @@ export const CATEGORIES: Category[] = [
                              "zuid-holland_V", "zuid-nederland_V", "noord-nederland_V" ],
       },
       { key: "Zaal", pathKey: "Z", label: "Z", groupKeys: [] },
-      { key: "Periode2", label: "P2", groupKeys: ["Landelijk_P2", "bond_super_P2", "bond_sub_P2"] }, 
+      { key: "Periode2", label: "P2", groupKeys: ["Landelijk_P2", "bond_super_P2", "bond_sub_P2", "noord-holland_P2"] }, 
     ],
     groups: [
     { key: "bond_top_V", pathKey: "bond_top", label: "Landelijke Topklasse", pouleIds: [180907,180908,180909,180910,180911,180912,180913,180914]},
@@ -119,7 +124,10 @@ export const CATEGORIES: Category[] = [
         , pouleIds: [  183448,183449,183450, 183451 ]},
       { key: "bond_sub_P2", pathKey: "Subtopklasse", label: "Subtopklasse"
         , pouleIds: [ 183452, 183453, 183454, 183455, 183456, 183457 ]},
-] },
+
+    { key: "noord-holland_P2", pathKey: "NH", label: "Noord-Holland", pouleIds: [ 183279, 183280, 133281 ] },
+
+      ] },
   { key: "MO18", label: "MO18",    displayMode: 'standings',
     phases: [ { key: "Voorcompetitie",
                 label: "V",
@@ -127,7 +135,8 @@ export const CATEGORIES: Category[] = [
                              "zuid-holland_V", "zuid-nederland_V", "noord-nederland_V" ],
       },
       { key: "Zaal", label: "Z", groupKeys: [] },
-      { key: "Periode2", label: "P2", groupKeys: ["Landelijk_P2", "bond_super_P2", "bond_sub_P2"] }, 
+      { key: "Herfst", label: "H", groupKeys: [] },
+      { key: "Periode2", label: "P2", groupKeys: ["Landelijk_P2", "bond_super_P2", "bond_sub_P2", "noord-holland_P2"] }, 
     ]
     , groups: [
       { key: "bond_top_V", label: "Landelijke Topklasse"
@@ -139,6 +148,8 @@ export const CATEGORIES: Category[] = [
         , pouleIds: [ 183436, 183437, 183438, 183439 ]},
       { key: "bond_sub_P2", pathKey: "Subtopklasse", label: "Subtopklasse"
         , pouleIds: [ 183440, 183441, 183442,183443, 183444, 183445]},
+    { key: "noord-holland_P2", pathKey: "NH", label: "Noord-Holland", pouleIds: [ 183417, 183418, 183419, 183420,
+      183421, 183422, 183423, 183424, 183425, 183426, 183427, 183428, 183429, 183431, 183432, 183433     ] },
 
 
       { key: "bond_subtop_V", label: "Landelijke Subtopklasse"
@@ -169,10 +180,18 @@ export const CATEGORIES: Category[] = [
 
   ] },
     { key: "jo16", label: "JO16",     displayMode: 'standings',
+
+    phases: [ { key: "Voorcompetitie",                label: "V",                groupKeys: [  ],      },
+      { key: "Zaal", label: "Z", groupKeys: [] },
+      { key: "Herfst", label: "H", groupKeys: [ "Topklasse", "Subtopklasse", "midden-nederland", "noord-holland", "zuid-holland", "zuid-nederland", "noord-nederland" ] },
+      { key: "Periode2", label: "P2", groupKeys: [] }, 
+    ],
+
+      
     groups: [
-    { key: "bond", label: "Landelijke Topklasse"
+    { key: "Topklasse", label: "Landelijke Topklasse"
       , pouleIds: [ 180931,180932,180933,180934,180935,180936,180937,180938]},
-    { key: "bond2", label: "Landelijke Subtopklasse"
+    { key: "Subtopklasse", label: "Landelijke Subtopklasse"
       , pouleIds: [180939,180940,180941,180942,180943,180944,180945,180946]},
     { key: "midden-nederland", label: "Midden Nederland"
       , pouleIds: [181254,181255,181256,181257,181258,181259,181260,181261,181262,181371,181372,181373    ] },
@@ -182,10 +201,17 @@ export const CATEGORIES: Category[] = [
     { key: "noord-nederland", label: "Noord+Oost Nederland", pouleIds: [ 182555,182556,182557,182558,182559,182560,182561,182562] },
   ] },
   { key: "mo16", label: "MO16",     displayMode: 'standings',
+    phases: [ { key: "Voorcompetitie",                label: "V",                groupKeys: [  ],      },
+      { key: "Zaal", label: "Z", groupKeys: [] },
+      { key: "Herfst", label: "H", groupKeys: [ "Topklasse", "Subtopklasse", "midden-nederland", "noord-holland", "zuid-holland", "zuid-nederland", "noord-nederland" ] },
+      { key: "Periode2", label: "P2", groupKeys: [] }, 
+    ],
+
+
     groups: [
-    { key: "bond", label: "Landelijke Topklasse"
+    { key: "Topklasse", label: "Landelijke Topklasse"
       , pouleIds: [180891,180892,180893,180894,180895,180896,180897,180898]},
-    { key: "bond2", label: "Landelijke Subtopklasse"
+    { key: "Subtopklasse", label: "Landelijke Subtopklasse"
       , pouleIds: [180899,180900,180901,180902,180903,180904,180905,180906] },
     { key: "midden-nederland", label: "Midden Nederland"
       , pouleIds: [ 181141,181142,181143,181144,181145,181146,181147,181148,181149,181150,
@@ -210,12 +236,30 @@ export const CATEGORIES: Category[] = [
                     182395,182396,182397,182398    ] },
   ] },
     { key: "jo14", label: "JO14",     displayMode: 'standings',
+    phases: [ { key: "Voorcompetitie",                label: "V",                groupKeys: [  ],      },
+      { key: "Zaal", label: "Z", groupKeys: [] },
+      { key: "Herfst", label: "H", groupKeys: [ "midden-nederland", "noord-holland", "zuid-holland", "noord-nederland", "zuid-nederland" ] },
+      { key: "Periode2", label: "P2", groupKeys: [] }, 
+    ],      
     groups: [ 
       { key: "midden-nederland", label: "Midden Nederland", pouleIds: [ 180947,180948,180949,180950 ] },
       { key: "zuid-holland", label: "Zuid Holland", pouleIds: [ 181432,181433, 181704, 181705 ]}, //, 181688, 181689,181690,181691,181692  ]},
       { key: "noord-holland", label: "Noord-Holland", pouleIds: [182129,182130, 182131,182132]}, //182133,182134,182135,182136] },
       { key: "zuid-nederland", label: "Zuid Nederland", pouleIds: [ 181112,181820,181821]},//181830,181831,181832,181851,181852,181853,181858,181859,181860,181861    ] },
       { key: "noord-nederland", label: "Noord+Oost Nederland", pouleIds: [182563, 182564, 182565] }, //, 182566 
+    ]},
+        { key: "MO14", label: "MO14",     displayMode: 'standings',
+    phases: [ { key: "Voorcompetitie",                label: "V",                groupKeys: [  ],      },
+      { key: "Zaal", label: "Z", groupKeys: [] },
+      { key: "Herfst", label: "H", groupKeys: [ "midden-nederland", "noord-holland", "zuid-holland", "noord-nederland", "zuid-nederland" ] },
+      { key: "Periode2", label: "P2", groupKeys: [] }, 
+    ],      
+    groups: [ 
+      { key: "midden-nederland", label: "Midden Nederland", pouleIds: [  ] },
+      { key: "zuid-holland", label: "Zuid Holland", pouleIds: [ ]}, 
+      { key: "noord-holland", label: "Noord-Holland", pouleIds: [182275]},
+      { key: "zuid-nederland", label: "Zuid Nederland", pouleIds: [ ]},
+      { key: "noord-nederland", label: "Noord+Oost Nederland", pouleIds: [] }, 
     ]}
 ];
 
