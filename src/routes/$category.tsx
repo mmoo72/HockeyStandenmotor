@@ -1,6 +1,6 @@
 import { createFileRoute, notFound, Link, Outlet, useLocation } from "@tanstack/react-router";
 import { useState } from "react";
-import { getCategory, getAllPouleIds, hasRegions, type Category, type PouleGroup } from "@/config/poules";
+import { getCategory, getAllPouleIds, hasRegions, type Category, type PouleGroup, type PoulePhase } from "@/config/poules";
 
 import { StandingsView } from "#/components/StandingsView";
 
@@ -51,22 +51,7 @@ function CategoryPage() {
           {category.phases && (
             <PhaseMenu category={category} phaseKey={phaseKey} onSelect={setPhaseKey} />
           )}
-          <div className="flex flex-wrap gap-1">
-            {groups.map((g) => (
-              <Link
-                key={g.key}
-                to="/$category/$region"
-                params={{ category: category.key, region: g.key }}
-                className={
-                  g.key === defaultGroup.key
-                    ? "px-3 py-1.5 rounded-md text-sm font-medium bg-foreground text-background"
-                    : "px-3 py-1.5 rounded-md text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-                }
-              >
-                {g.label}
-              </Link>
-            ))}
-          </div>
+          <GroupMenu category={category} groups={groups} phase={selectedPhase} activeGroupKey={defaultGroup.key} />
         </div>
         <StandingsView
           title={`${category.label} — ${defaultGroup.label}`}
@@ -105,5 +90,49 @@ function PhaseMenu({
         ))}
       </select>
     </label>
+  );
+}
+
+function GroupMenu({
+  category,
+  groups,
+  phase,
+  activeGroupKey,
+}: {
+  category: Category;
+  groups: PouleGroup[];
+  phase?: PoulePhase;
+  activeGroupKey: string;
+}) {
+  return (
+    <div className="flex flex-wrap gap-1">
+      {groups.map((group) => {
+        const className =
+          group.key === activeGroupKey
+            ? "px-3 py-1.5 rounded-md text-sm font-medium bg-foreground text-background"
+            : "px-3 py-1.5 rounded-md text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors";
+        const region = group.pathKey ?? group.key;
+
+        return phase ? (
+          <Link
+            key={group.key}
+            to="/$category/$phase/$region"
+            params={{ category: category.key, phase: phase.pathKey ?? phase.key, region }}
+            className={className}
+          >
+            {group.label}
+          </Link>
+        ) : (
+          <Link
+            key={group.key}
+            to="/$category/$region"
+            params={{ category: category.key, region }}
+            className={className}
+          >
+            {group.label}
+          </Link>
+        );
+      })}
+    </div>
   );
 }

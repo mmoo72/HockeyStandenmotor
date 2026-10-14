@@ -149,6 +149,13 @@ useEffect(() => {
               <Link to="/" className="text-lg font-semibold tracking-tight">
                 Hockeystanden
               </Link>
+              <Link
+                to="/sitemap"
+                className="rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                activeProps={{ className: "rounded-md bg-muted px-3 py-1.5 text-sm font-medium text-foreground" }}
+              >
+                Sitemap
+              </Link>
             </div>
           </header>
 

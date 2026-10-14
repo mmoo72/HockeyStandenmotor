@@ -9,11 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapRouteImport } from './routes/sitemap'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as CategoryRouteImport } from './routes/$category'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CategoryRegionRouteImport } from './routes/$category.$region'
+import { Route as CategoryPhaseRegionRouteImport } from './routes/$category.$phase.$region'
 
+const SitemapRoute = SitemapRouteImport.update({
+  id: '/sitemap',
+  path: '/sitemap',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -34,42 +41,80 @@ const CategoryRegionRoute = CategoryRegionRouteImport.update({
   path: '/$region',
   getParentRoute: () => CategoryRoute,
 } as any)
+const CategoryPhaseRegionRoute = CategoryPhaseRegionRouteImport.update({
+  id: '/$phase/$region',
+  path: '/$phase/$region',
+  getParentRoute: () => CategoryRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$category': typeof CategoryRouteWithChildren
   '/about': typeof AboutRoute
+  '/sitemap': typeof SitemapRoute
   '/$category/$region': typeof CategoryRegionRoute
+  '/$category/$phase/$region': typeof CategoryPhaseRegionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$category': typeof CategoryRouteWithChildren
   '/about': typeof AboutRoute
+  '/sitemap': typeof SitemapRoute
   '/$category/$region': typeof CategoryRegionRoute
+  '/$category/$phase/$region': typeof CategoryPhaseRegionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$category': typeof CategoryRouteWithChildren
   '/about': typeof AboutRoute
+  '/sitemap': typeof SitemapRoute
   '/$category/$region': typeof CategoryRegionRoute
+  '/$category/$phase/$region': typeof CategoryPhaseRegionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$category' | '/about' | '/$category/$region'
+  fullPaths:
+    | '/'
+    | '/$category'
+    | '/about'
+    | '/sitemap'
+    | '/$category/$region'
+    | '/$category/$phase/$region'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$category' | '/about' | '/$category/$region'
-  id: '__root__' | '/' | '/$category' | '/about' | '/$category/$region'
+  to:
+    | '/'
+    | '/$category'
+    | '/about'
+    | '/sitemap'
+    | '/$category/$region'
+    | '/$category/$phase/$region'
+  id:
+    | '__root__'
+    | '/'
+    | '/$category'
+    | '/about'
+    | '/sitemap'
+    | '/$category/$region'
+    | '/$category/$phase/$region'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CategoryRoute: typeof CategoryRouteWithChildren
   AboutRoute: typeof AboutRoute
+  SitemapRoute: typeof SitemapRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap': {
+      id: '/sitemap'
+      path: '/sitemap'
+      fullPath: '/sitemap'
+      preLoaderRoute: typeof SitemapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -98,15 +143,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CategoryRegionRouteImport
       parentRoute: typeof CategoryRoute
     }
+    '/$category/$phase/$region': {
+      id: '/$category/$phase/$region'
+      path: '/$phase/$region'
+      fullPath: '/$category/$phase/$region'
+      preLoaderRoute: typeof CategoryPhaseRegionRouteImport
+      parentRoute: typeof CategoryRoute
+    }
   }
 }
 
 interface CategoryRouteChildren {
   CategoryRegionRoute: typeof CategoryRegionRoute
+  CategoryPhaseRegionRoute: typeof CategoryPhaseRegionRoute
 }
 
 const CategoryRouteChildren: CategoryRouteChildren = {
   CategoryRegionRoute: CategoryRegionRoute,
+  CategoryPhaseRegionRoute: CategoryPhaseRegionRoute,
 }
 
 const CategoryRouteWithChildren = CategoryRoute._addFileChildren(
@@ -117,6 +171,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CategoryRoute: CategoryRouteWithChildren,
   AboutRoute: AboutRoute,
+  SitemapRoute: SitemapRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
