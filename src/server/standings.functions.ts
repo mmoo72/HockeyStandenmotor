@@ -38,17 +38,32 @@ async function getDevice(): Promise<DeviceCreds> {
   if (configured) return configured;
   if (cachedDevice && cachedDevice.expires > now) return cachedDevice;
   const uuid = crypto.randomUUID();
-  const res = await fetch(`${BASE}/device/register`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      "X-Requested-With": "XMLHttpRequest",
-    },
-    body: JSON.stringify({ uuid, os: "Web" }),
-  });
-  if (!res.ok) throw new Error(`device/register failed: ${res.status}`);
-  const data = (await res.json()) as { token: string };
+  let data: { token: string } | undefined;
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    const res = await fetch(`${BASE}/device/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "X-Requested-With": "XMLHttpRequest",
+      },
+      body: JSON.stringify({ uuid, os: "Web" }),
+    });
+    if (res.ok) {
+      data = (await res.json()) as { token: string };
+      break;
+    }
+    if (![429, 500, 502, 503, 504].includes(res.status) || attempt === 2) {
+      throw new Error(`device/register failed: ${res.status}`);
+    }
+
+    const retryAfter = Number(res.headers.get("Retry-After"));
+    const delayMs = Number.isFinite(retryAfter) && retryAfter > 0
+      ? Math.min(retryAfter * 1000, 30_000)
+      : 1_000 * 2 ** attempt;
+    await new Promise((resolve) => setTimeout(resolve, delayMs));
+  }
+  if (!data?.token) throw new Error("device/register response did not include a token");
   // Cache for 24h; if token rejected later we'll re-register.
   cachedDevice = { uuid, token: data.token, expires: now + 24 * 60 * 60 * 1000 };
   return cachedDevice;
@@ -262,12 +277,10 @@ export const getPouleStandings = createServerFn({ method: "GET" })
   .inputValidator((data: { pouleId: number; force?: boolean }) => data)
   .handler(async ({ data }): Promise<PouleResult> => {
     const now = Date.now();
-    if (!data.force) {
-      const stored = await readPouleFile(data.pouleId);
-      if (stored) {
-        resultCache.set(data.pouleId, { expires: now + RESULT_TTL_MS, result: stored });
-        return stored;
-      }
+    const stored = await readPouleFile(data.pouleId);
+    if (stored) {
+      resultCache.set(data.pouleId, { expires: now + RESULT_TTL_MS, result: stored });
+      if (!data.force) return stored;
     }
     let promise = inflight.get(data.pouleId);
     if (!promise) {
