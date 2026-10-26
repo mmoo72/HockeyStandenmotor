@@ -197,9 +197,9 @@ export const CATEGORIES: Category[] = [
       pouleIds: [ 184010, 183771, 183772, 183773, 183783, 183784, 183785, 183794, 183795, 183796, 183797, 183798, 183799, 183800, 183805,
         184005, 184006, 184007, 184008, 184009, 184010 ] },
     { key: "zuid-nederland_P2", pathKey: "ZuidNederland", label: "Zuid Nederland", pouleIds: [ ] },
-    { key: "noord-nederland_P2", pathKey: "NoordOostNederland", label: "Noord+Oost Nederland", pouleIds: [ 184207, 184208, 184209, 184210, 
-                                                            184211, 184212, 184213, 184214, 184215, 184216, 184217, 184218, 184219, 184220,
-                                                            184221, 184222, 184223, 184224, 184225] },
+    { key: "noord-nederland_P2", pathKey: "NoordOostNederland", label: "Noord+Oost Nederland", pouleIds: [ 184207, 184208, 184209, //184210, 
+                                                            184211, 184212, 184213, 184214, 184215, 184216, 184217, 184218, 184219, // 184220,
+                                                            184221, 184222, 184223, 184224, 184225 ] },
     { key: "bond_subtop_V", label: "Landelijke Subtopklasse"
         , pouleIds: [ 180875,180876,180877,180878,180879, 180880,180881,180882,180883
                     , 180884,180885,180886,180887,180888,180889,180890 ]},
