@@ -41,7 +41,7 @@ export const CATEGORIES: Category[] = [
         key: "goldcup", 
         label: "Gold Cup", 
         displayMode:'matches', 
-        pouleIds: [ 183128, 183129, 183130, 183170, 183171 ,183172, 183206, 183205 ]
+        pouleIds: [ 183128, 183129, 183130, 183170, 183171 ,183172, 183206, 183205, 184529 ]
       },
       { 
         key: "silvercup", 
@@ -49,7 +49,7 @@ export const CATEGORIES: Category[] = [
         displayMode:'matches', 
         pouleIds: [ 183131, 183132, 183133, 183156, 183157, 183158, 183159, 183181,  
                     183182, 183183, 183184, 183185, 183212, 183213, 183214, 183215, 
-                    183216 ] }
+                    183216, 184523, 184524, 184525, 184526, 184527, 184528] }
     ] },
   { 
     key: "dames", 
@@ -66,13 +66,14 @@ export const CATEGORIES: Category[] = [
         key: "goldcup", 
         label: "Gold Cup", 
         displayMode:'matches', 
-        pouleIds: [ 183121, 183122, 183123, 183186, 183187, 183188 ] },
+        pouleIds: [ 183121, 183122, 183123, 183186, 183187, 183188, 184513,184513, 184514 ] },
       { 
         key: "silvercup", 
         label: "Silver Cup", 
         displayMode:'matches', 
         pouleIds: [ 183124, 183125, 183126, 183127, 183173, 183174, 183175, 183176, 
-                    183207, 183208, 183209, 183210, 183211 ] },
+                    183207, 183208, 183209, 183210, 183211, 184519, 184520, 184515, 184516, 184517, 184518
+ ] },
 ] },
   
   {
@@ -165,7 +166,7 @@ export const CATEGORIES: Category[] = [
     { key: "noord-holland_P2", pathKey: "NoordHolland", label: "Noord-Holland", pouleIds: [ 183279, 183280, 183281, 183282, 183283, 183611 ] },
     { key: "midden-nederland_P2", pathKey: "MiddenNederland", label: "Midden Nederland", pouleIds: [ 183994, 183995, 183996, 183997, 183998, 183999, 184000 ] },
     { key: "zuid-holland_P2", pathKey: "ZuidHolland", label: "Zuid-Holland", pouleIds: [183853, 183854, 183855, 183856, 183857, 183858 ] },
-    { key: "zuid-nederland_P2", pathKey: "ZuidNederland", label: "Zuid Nederland", pouleIds: [ ] },
+    { key: "zuid-nederland_P2", pathKey: "ZuidNederland", label: "Zuid Nederland", pouleIds: [184448, 184449,184450,184451,184452,184453,184454,184455 ] },
     { key: "noord-nederland_P2", pathKey: "NoordOostNederland", label: "Noord+Oost Nederland", pouleIds: [ 184063, 184064, 184065, 184066] },
     
 
@@ -196,7 +197,10 @@ export const CATEGORIES: Category[] = [
     { key: "zuid-holland_P2", pathKey: "ZuidHolland", label: "Zuid-Holland", 
       pouleIds: [ 184010, 183771, 183772, 183773, 183783, 183784, 183785, 183794, 183795, 183796, 183797, 183798, 183799, 183800, 183805,
         184005, 184006, 184007, 184008, 184009, 184010 ] },
-    { key: "zuid-nederland_P2", pathKey: "ZuidNederland", label: "Zuid Nederland", pouleIds: [ ] },
+    { key: "zuid-nederland_P2", pathKey: "ZuidNederland", label: "Zuid Nederland", pouleIds: [ 184227, 184228, 184229, 184230,
+      184231, 184232, 184233, 184234, 184235, 184236, 184237, 184238, 184239, 184240,
+      184241, 184242, 184243, 184244, 184245, 184246, 184247, 184248, 184249, 184250,
+      184251, 184252 ] },
     { key: "noord-nederland_P2", pathKey: "NoordOostNederland", label: "Noord+Oost Nederland", pouleIds: [ 184207, 184208, 184209, //184210, 
                                                             184211, 184212, 184213, 184214, 184215, 184216, 184217, 184218, 184219, // 184220,
                                                             184221, 184222, 184223, 184224, 184225 ] },
@@ -286,7 +290,7 @@ export const CATEGORIES: Category[] = [
     { key: "jo14", label: "JO14",     displayMode: 'standings',
     phases: [ { key: "Voorcompetitie",                label: "V",                groupKeys: [  ],      },
       { key: "Zaal", label: "Z", groupKeys: [] },
-      { key: "Herfst", label: "H", groupKeys: [ "midden-nederland", "noord-holland", "zuid-holland", "noord-nederland", "zuid-nederland" ] },
+      { key: "Herfst", label: "Herfst", groupKeys: [ "midden-nederland", "noord-holland", "zuid-holland", "noord-nederland", "zuid-nederland" ] },
       { key: "Periode2", label: "P2", groupKeys: [] }, 
     ],      
     groups: [ 
@@ -299,7 +303,7 @@ export const CATEGORIES: Category[] = [
         { key: "MO14", label: "MO14",     displayMode: 'standings',
     phases: [ { key: "Voorcompetitie",                label: "V",                groupKeys: [  ],      },
       { key: "Zaal", label: "Z", groupKeys: [] },
-      { key: "Herfst", label: "H", groupKeys: [ "midden-nederland", "noord-holland", "zuid-holland", "noord-nederland", "zuid-nederland" ] },
+      { key: "Herfst", label: "Herfst", groupKeys: [ "midden-nederland", "noord-holland", "zuid-holland", "noord-nederland", "zuid-nederland" ] },
       { key: "Periode2", label: "P2", groupKeys: [] }, 
     ],      
     groups: [ 
