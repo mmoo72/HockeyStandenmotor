@@ -1,10 +1,40 @@
-import { createFileRoute, notFound, Link, Outlet, useLocation } from "@tanstack/react-router";
+import { createFileRoute, notFound, Link, Outlet, redirect, useLocation } from "@tanstack/react-router";
 import { useState } from "react";
 import { getCategory, getAllPouleIds, hasRegions, type Category, type PouleGroup, type PoulePhase } from "@/config/poules";
 
 import { StandingsView } from "#/components/StandingsView";
 
 export const Route = createFileRoute("/$category")({
+  beforeLoad: ({ params, location }) => {
+    const category = getCategory(params.category);
+    if (!category) throw notFound();
+
+    if (
+      location.pathname === `/${category.key}` &&
+      category.defaultPhaseKey &&
+      category.defaultGroupKey
+    ) {
+      const phase = category.phases?.find(
+        (item) => item.key === category.defaultPhaseKey,
+      );
+      const group = category.groups.find(
+        (item) => item.key === category.defaultGroupKey,
+      );
+
+      if (!phase || !group || !phase.groupKeys.includes(group.key)) {
+        throw new Error(`Invalid default phase or group configured for ${category.key}`);
+      }
+
+      throw redirect({
+        to: "/$category/$phase/$region",
+        params: {
+          category: category.key,
+          phase: phase.pathKey ?? phase.key,
+          region: group.pathKey ?? group.key,
+        },
+      });
+    }
+  },
   loader: ({ params }) => {
     const cat = getCategory(params.category);
     if (!cat) throw notFound();
@@ -17,7 +47,9 @@ function CategoryPage() {
   const { category } = Route.useLoaderData() as { category: Category };
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
-  const [phaseKey, setPhaseKey] = useState(category.phases?.[0]?.key);
+  const [phaseKey, setPhaseKey] = useState(
+    category.defaultPhaseKey ?? category.phases?.[0]?.key,
+  );
 
   if (pathSegments.length > 1) {
     return <Outlet />;

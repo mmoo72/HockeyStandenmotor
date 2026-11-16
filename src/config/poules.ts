@@ -13,6 +13,8 @@ export type Category = {
   label: string;
   groups: PouleGroup[];
   phases?: PoulePhase[];
+  defaultPhaseKey?: string;
+  defaultGroupKey?: string;
   displayMode?: DisplayMode;
 };
 
@@ -36,12 +38,12 @@ export const CATEGORIES: Category[] = [
         pouleIds: [ 180864, 182075, 182076, 182077, 182651, 182652, 182653, 182654,
                     182655, 182656, 182657, 182658, 182659, 182660, 182661, 182662, 
                     182663, 182664, 182917 ] 
-    },
+      },
       { 
         key: "goldcup", 
         label: "Gold Cup", 
         displayMode:'matches', 
-        pouleIds: [ 183128, 183129, 183130, 183170, 183171 ,183172, 183206, 183205, 184529 ]
+        pouleIds: [ 183128, 183129, 183130, 183170, 183171, 183172, 183205, 183206, 184529, 186065 ]
       },
       { 
         key: "silvercup", 
@@ -49,7 +51,13 @@ export const CATEGORIES: Category[] = [
         displayMode:'matches', 
         pouleIds: [ 183131, 183132, 183133, 183156, 183157, 183158, 183159, 183181,  
                     183182, 183183, 183184, 183185, 183212, 183213, 183214, 183215, 
-                    183216, 184523, 184524, 184525, 184526, 184527, 184528] }
+                    183216, 184523, 184524, 184525, 184526, 184527, 184528,
+                  186061, 186062, 186063, 186064,] 
+      },
+      {
+        key: "zaal", label: "Zaal", displayMode:'standings', pouleIds: 
+        [ 185396, 185397, 185398, 185399 ]
+      }
     ] },
   { 
     key: "dames", 
@@ -66,7 +74,7 @@ export const CATEGORIES: Category[] = [
         key: "goldcup", 
         label: "Gold Cup", 
         displayMode:'matches', 
-        pouleIds: [ 183121, 183122, 183123, 183186, 183187, 183188, 184513,184513, 184514 ] },
+        pouleIds: [ 183121, 183122, 183123, 183186, 183187, 183188, 184513, 184514 ] },
       { 
         key: "silvercup", 
         label: "Silver Cup", 
@@ -93,6 +101,11 @@ export const CATEGORIES: Category[] = [
         , pouleIds: [182839, 182840, 182841, 182842, 182843, 182844, 182845, 182846, 182847, 182848, 182849, 182850, 182851] },
       { key: "noord-oost-nederland", label: "Noord+Oost Nederland"
         , pouleIds: [182970, 182971, 182972, 182973, 182974, 182975, 182976, 182977, 182978, 182979] },
+        
+      {
+        key: "zaal", label: "Zaal Zuid Holland", displayMode:'standings'
+        , pouleIds: [  185400, 185401, 185402, 185403, 185404, 185405, 185406, 185407  ]
+      }
     ],
   },
   {
@@ -126,6 +139,8 @@ export const CATEGORIES: Category[] = [
   { key: "JO18", 
     label: "JO18",     
     displayMode: 'standings',
+    defaultPhaseKey: "Periode2",
+    defaultGroupKey: "Landelijk_P2",
     phases: [ 
       { 
         key: "Voorcompetitie", pathKey: "Voor",
@@ -173,6 +188,8 @@ export const CATEGORIES: Category[] = [
 
       ] },
   { key: "MO18", label: "MO18",    displayMode: 'standings',
+    defaultPhaseKey: "Periode2",
+    defaultGroupKey: "Landelijk_P2",
     phases: [ { key: "Voorcompetitie",  pathKey: "Voor",
                 label: "Voorcompetitie",
                 groupKeys: [ "bond_top_V", "bond_subtop_V", "midden-nederland_V", "noord-holland_V",
